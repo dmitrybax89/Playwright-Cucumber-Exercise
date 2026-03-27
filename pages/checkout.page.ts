@@ -31,20 +31,20 @@ export class Checkout {
         await this.page.locator(this.zip).fill(userData.ZIP)
     }
 
-        public async checkoutClickContinue() {
+    public async checkoutClickContinue() {
         await this.page.locator(this.checkoutContinue).click()
     }
 
-        public async checkoutClickFinish() {
+    public async checkoutClickFinish() {
         await this.page.locator(this.finishButton).click()
     }
 
     public async orderSuccess() {
-        await this.page.locator(this.orderSuccessMessage).click();
+        await this.page.locator(this.orderSuccessMessage)
         const expectedMessage = 'Thank you for your order!';
-        const actualMessage = await this.page.locator(this.orderSuccessMessage).textContent();
+        const actualMessage = await this.page.locator(this.orderSuccessMessage).textContent()
         if (actualMessage?.trim() !== expectedMessage) {
-            throw new Error(`Expected "${expectedMessage}" but found "${actualMessage}"`);
+            throw new Error(`Expected "${expectedMessage}" but found "${actualMessage}"`)
         }
     }
 

@@ -9,3 +9,7 @@ Then('I sort items by {string}', async (sort: string) => {
 Then('items should be sorted by price {string}', async (order: string) => {
     await new Category(getPage()).validatePriceSort(order);
 });
+
+Then('items should be sorted by name {string}', async (order: string) => {
+    await new Category(getPage()).validateNameSort(order);
+});

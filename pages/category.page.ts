@@ -25,4 +25,15 @@ export class Category {
             throw new Error(`Expected prices [${sorted}] but found [${prices}]`);
         }
     }
+
+    public async validateNameSort(order: string) {
+    const names = await this.page.locator('[data-test="inventory-item-name"]').allTextContents();
+    const sorted = order === 'asc'
+        ? [...names].sort()
+        : [...names].sort().reverse();
+
+    if (JSON.stringify(names) !== JSON.stringify(sorted)) {
+        throw new Error(`Expected names [${sorted}] but found [${names}]`);
+    }
+}
 }
