@@ -4,6 +4,7 @@
       "module": "CommonJS",
       "strict": true,
       "esModuleInterop": true,
+      "resolveJsonModule": true,
       "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true
     },
@@ -13,4 +14,4 @@
     "exclude": [
       "node_modules"
     ]
-  }
+}

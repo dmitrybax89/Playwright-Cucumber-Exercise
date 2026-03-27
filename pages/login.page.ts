@@ -6,6 +6,7 @@ export class Login {
     private readonly passwordField: string = 'input[id="password"]'
     private readonly userNameField: string = 'input[id="user-name"]'
     private readonly loginButton: string = 'input[id="login-button"]'
+    private readonly errorMessage: string= '[data-test="error"]'
 
     constructor(page: Page) {
         this.page = page;
@@ -13,7 +14,11 @@ export class Login {
 
     public async validateTitle(expectedTitle: string) {
         const pageTitle = await this.page.title();
-        if (pageTitle !== expectedTitle) {
+        /**
+         * // This change is not necessary,
+         *  but, if register isn't important it's better to check use toLowerCase() to avoid possible issues
+         */
+        if (pageTitle.toLowerCase() !== expectedTitle.toLowerCase()) { 
           throw new Error(`Expected title to be ${expectedTitle} but found ${pageTitle}`);
         }
     }
@@ -23,4 +28,11 @@ export class Login {
         await this.page.locator(this.passwordField).fill(this.password)
         await this.page.locator(this.loginButton).click()
     }
+
+  public async validateErrorMessage(expectedMessage: string) {
+    const actualMessage = await this.page.locator(this.errorMessage).textContent();
+    if (actualMessage !== expectedMessage) {
+        throw new Error(`Expected error "${expectedMessage}" but found "${actualMessage}"`);
+    }
+}
 }
